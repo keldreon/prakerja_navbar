@@ -35,6 +35,36 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    List<Kontak> kontak = [
+      Kontak(
+        'Leanne Graham',
+        '1-770-736-8031 x56442',
+      ),
+      Kontak(
+        'Ervin Howell',
+        '010-692-65-92 x09125',
+      ),
+      Kontak(
+        'Clemantine Bauch',
+        '1-463-123-4447',
+      ),
+      Kontak(
+        'Patricia Lebsack',
+        '493-170-9623 x156',
+      ),
+      Kontak(
+        'Chelsey Dietrich',
+        '(254)954-1289',
+      ),
+      Kontak(
+        'Mrs Dennis Schulist',
+        '1-477-935-8478 x6430',
+      ),
+      Kontak(
+        'Kurtis Weissnat',
+        '210.067.6132',
+      )
+    ];
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).primaryColorDark,
@@ -71,15 +101,15 @@ class _MyHomePageState extends State<MyHomePage> {
                 Navigator.pop(context);
               },
             ),
-            Divider(),
+            const Divider(),
             ListTile(
-              title: Text('Item 3'),
+              title: const Text('Item 3'),
               onTap: () {
                 Navigator.pop(context);
               },
             ),
             ListTile(
-              title: Text('Item 4'),
+              title: const Text('Item 4'),
               onTap: () {
                 Navigator.pop(context);
               },
@@ -87,20 +117,40 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      body: const Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You are in Home',
-            ),
-          ],
-        ),
-      ),
+      body: Column(children: [
+        for (Kontak k in kontak)
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Row(children: [
+              CircleAvatar(
+                backgroundColor: Colors.green,
+                child: Text(k.nama[0]),
+              ),
+              Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(k.nama),
+                        Text(
+                          k.noTelp,
+                          style: const TextStyle(color: Colors.grey),
+                        ),
+                      ]))
+            ]),
+          ),
+      ]),
       bottomNavigationBar: BottomNavigationBar(items: const [
         BottomNavigationBarItem(icon: Icon(Icons.home), label: 'Home'),
         BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Setting'),
       ]),
     );
   }
+}
+
+class Kontak {
+  final String nama;
+  final String noTelp;
+
+  Kontak(this.nama, this.noTelp);
 }
